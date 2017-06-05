@@ -18,20 +18,17 @@ ARG gid=1000
 RUN groupadd -g ${gid} ${group} \
     && useradd -d ${KAFKA_HOME} -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
-#Create volume
-VOLUME /var/kafka_home
-
 #Set work directory
 WORKDIR $KAFKA_HOME
 
 #Download Kafka
-CMD curl -fsSL http://www-eu.apache.org/dist/kafka/0.10.2.1/kafka_2.10-0.10.2.1.tgz -o kafka_2.10-0.10.2.1.tgz
+RUN curl -fsSL http://www-eu.apache.org/dist/kafka/0.10.2.1/kafka_2.10-0.10.2.1.tgz -o ${KAFKA_HOME}/kafka_2.10-0.10.2.1.tgz
 
 #Extract Kafka
-CMD tar -xvzf kafka_2.10-0.10.2.1.tgz
+RUN tar -xvzf kafka_2.10-0.10.2.1.tgz
 
 #Start Kafka
-CMD bin/zookeeper-server-start.sh config/zookeeper.properties
+CMD $KAFKA_HOME/bin/zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties
 
 #Expose port
 EXPOSE 2181
