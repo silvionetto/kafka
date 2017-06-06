@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk
 
+#Kafka
 MAINTAINER Silvio Netto <silvio.netto@gmail.com>
 
 #Install curl
@@ -33,8 +34,9 @@ CMD $KAFKA_HOME/bin/zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.prope
 #Start Kafka
 CMD $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties
 
-#Expose port
+#Expose ports
 EXPOSE 2181
+EXPOSE 9092
 
 #Change user
 USER ${user}
