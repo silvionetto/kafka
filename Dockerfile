@@ -6,18 +6,11 @@ MAINTAINER Silvio Netto <silvio.netto@gmail.com>
 #Install curl
 RUN apt-get update && apt-get install -y git curl
 
+#Create Kafka Home
+RUN mkdir -p /var/kafka_home
+
 #Set variables
 ENV KAFKA_HOME=/var/kafka_home
-
-#Set arguments
-ARG user=kafka
-ARG group=kafka
-ARG uid=1000
-ARG gid=1000
-
-#Create user / Add user
-RUN groupadd -g ${gid} ${group} \
-    && useradd -d ${KAFKA_HOME} -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
 #Set work directory
 WORKDIR $KAFKA_HOME
@@ -28,15 +21,15 @@ RUN curl -fsSL http://www-eu.apache.org/dist/kafka/0.10.2.1/kafka_2.10-0.10.2.1.
 #Extract Kafka
 RUN tar -xvzf kafka_2.10-0.10.2.1.tgz
 
-#Start Zookeeper
-CMD $KAFKA_HOME/bin/zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties
+#Set work directory
+WORKDIR $KAFKA_HOME/kafka_2.10-0.10.2.1
 
-#Start Kafka
-CMD $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties
+#Copy entry point
+COPY docker-entrypoint.sh /var/kafka_home/kafka_2.10-0.10.2.1/docker-entrypoint.sh
 
-#Expose ports
+#Change permission
+RUN chmod +x /var/kafka_home/kafka_2.10-0.10.2.1/docker-entrypoint.sh
+
+#Expose port
 EXPOSE 2181
 EXPOSE 9092
-
-#Change user
-USER ${user}

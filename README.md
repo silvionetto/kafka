@@ -22,5 +22,5 @@
 - docker commit -m "Initial Version" -a "Silvio Netto" c5241dd0b857 silvionetto/kafka:0.1
 
 ###Run Image
-- docker run -p 2181:2181 --name kafka_0_1 -it silvionetto/kafka:0.1 /bin/bash
+- docker run -p 2181:2181 -p 9092:9092 --name kafka_0_1 -it silvionetto/kafka:0.1 /bin/bash
 - docker run --name kafka_producer_0_1 -it silvionetto/kafka_producer:0.1 /bin/bash
