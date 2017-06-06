@@ -27,8 +27,11 @@ RUN curl -fsSL http://www-eu.apache.org/dist/kafka/0.10.2.1/kafka_2.10-0.10.2.1.
 #Extract Kafka
 RUN tar -xvzf kafka_2.10-0.10.2.1.tgz
 
-#Start Kafka
+#Start Zookeeper
 CMD $KAFKA_HOME/bin/zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties
+
+#Start Kafka
+CMD $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties
 
 #Expose port
 EXPOSE 2181
