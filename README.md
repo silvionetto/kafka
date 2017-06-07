@@ -1,26 +1,46 @@
-#KAFKA
+# KAFKA Docker image
 
-##Git Hub
-[https://github.com/silvionetto/kafka](https://github.com/silvionetto/kafka)
+Kafka Docker image
 
-- git init
-- git add README.md
-- git commit -m "first commit"
-- git remote add origin https://github.com/silvionetto/kafka.git
-- git push -u origin master
+# Usage
+```
+docker run -p 2181:2181 -p 9092:9092 --name kafka_0_1 -it silvionetto/kafka:0.1 /bin/bash
+```
 
-##Docker Hub
-[https://hub.docker.com/r/silvionetto/kafka/](https://hub.docker.com/r/silvionetto/kafka/)
+# Git Hub
+[`https://github.com/silvionetto/kafka`](https://github.com/silvionetto/kafka)
 
-- bash --login '/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'
+```
+git clone https://github.com/silvionetto/kafka.git
+```
 
-###Build Image
-- docker build -t silvionetto/kafka:0.1 .
-- docker build -t silvionetto/kafka_producer:0.1 .
+# Docker Hub
+[`https://hub.docker.com/r/silvionetto/kafka/`](https://hub.docker.com/r/silvionetto/kafka/)
 
-###Commit Image
-- docker commit -m "Initial Version" -a "Silvio Netto" c5241dd0b857 silvionetto/kafka:0.1
+```
+bash --login '/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'
+```
 
-###Run Image
-- docker run -p 2181:2181 -p 9092:9092 --name kafka_0_1 -it silvionetto/kafka:0.1 /bin/bash
-- docker run --name kafka_producer_0_1 -it silvionetto/kafka_producer:0.1 /bin/bash
+# Build Image
+Kafka Server
+
+```
+docker build -t silvionetto/kafka:0.1 .
+```
+
+Kafka Producer
+
+```
+docker build -t silvionetto/kafka_producer:0.1 .
+```
+
+Kafka Consumer
+
+```
+docker build -t silvionetto/kafka_consumer:0.1 .
+```
+
+# Commit Image
+```
+docker commit -m "Initial Version" -a "Silvio Netto" c5241dd0b857 silvionetto/kafka:0.1
+```

@@ -24,11 +24,21 @@ RUN tar -xvzf kafka_2.10-0.10.2.1.tgz
 #Set work directory
 WORKDIR $KAFKA_HOME/kafka_2.10-0.10.2.1
 
-#Copy entry point
-COPY docker-entrypoint.sh /var/kafka_home/kafka_2.10-0.10.2.1/docker-entrypoint.sh
+#Create dir logs
+RUN mkdir logs
 
-#Change permission
-RUN chmod +x /var/kafka_home/kafka_2.10-0.10.2.1/docker-entrypoint.sh
+#Copy scripts
+COPY docker-entrypoint.sh bin/docker-entrypoint.sh
+COPY create-topic.sh bin/create-topic.sh
+COPY start-producer.sh bin/start-producer.sh
+
+#Change permissions
+RUN chmod +x bin/docker-entrypoint.sh
+RUN chmod +x bin/create-topic.sh
+RUN chmod +x bin/start-producer.sh
+
+CMD ${KAFKA_HOME}/kafka_2.10-0.10.2.1/bin/docker-entrypoint.sh
+#ENTRYPOINT ${KAFKA_HOME}/kafka_2.10-0.10.2.1/bin/docker-entrypoint.sh
 
 #Expose port
 EXPOSE 2181
