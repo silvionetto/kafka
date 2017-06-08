@@ -4,7 +4,7 @@ Kafka Docker image
 
 # Usage
 
-To validate follow the steps above:
+To validate follow the steps below:
 
 **Start Kafka service**
 
